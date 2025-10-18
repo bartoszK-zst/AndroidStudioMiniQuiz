@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical"
-        android:gravity="center">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/answerButton0"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Placeholder, there`ll be buttons with answers"/>
+        android:text="@string/answer_0" />
+
+    <View android:layout_width="match_parent" android:layout_height="8dp" />
+
+    <Button
+        android:id="@+id/answerButton1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/answer_1" />
+
+    <View android:layout_width="match_parent" android:layout_height="8dp" />
+
+    <Button
+        android:id="@+id/answerButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/answer_2" />
 
 </LinearLayout>

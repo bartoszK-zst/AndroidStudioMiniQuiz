@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mini Quiz – Autor Bartosz Król"/>
+        android:text="@string/author_text"/>
 
     <View
         android:layout_width="1dp"
@@ -17,7 +17,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rozpocznij quiz"
+        android:text="@string/start_button"
         android:id="@+id/startButton"/>
 
 </LinearLayout>
