@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class QuizViewFragment extends Fragment implements AnswersViewFragment.OnAnswerSelectedListener {
-    private int Score = 0;
     private int QuestionNumber = 0;
     private int TotalQuestions = 5;
     private final QuestionsLibrary questionsLibrary = new QuestionsLibrary(true);
@@ -36,8 +35,9 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
 
         Button resetButton = view.findViewById(R.id.resetButton);
         resetButton.setOnClickListener(v -> {
-            resetQuiz();
-            loadNextQuestion();
+            if(getParentFragment() instanceof QuizResetListener){
+                ((QuizResetListener) getParentFragment()).onQuizReset();
+            }
         });
 
 
@@ -53,8 +53,11 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
         }
 
         if (index == currentQuestion.getCorrectAnswerIndex()) {
-            Score++;
             Toast.makeText(getContext(), "Poprawna odpowiedź!", Toast.LENGTH_SHORT).show();
+            // Powiadom kontener (np. aktywność) że zaznaczono poprawną odpowiedź
+            if (getActivity() instanceof CorrectAnswerSelectedListener) {
+                ((CorrectAnswerSelectedListener) getActivity()).onCorrectAnswerSelected();
+            }
         } else {
             Toast.makeText(getContext(), "Błędna odpowiedź!", Toast.LENGTH_SHORT).show();
         }
@@ -70,8 +73,6 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
 
     private void loadNextQuestion() {
         if (QuestionNumber >= TotalQuestions) {
-            // Quiz zakończony
-            Toast.makeText(getContext(), "Koniec quizu! Twój wynik: " + Score + "/" + TotalQuestions, Toast.LENGTH_LONG).show();
             resetQuiz();
             return;
         }
@@ -110,8 +111,16 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
     }
 
     private void resetQuiz() {
-        Score = 0;
         QuestionNumber = 0;
         currentQuestion = null;
+    }
+
+
+    public interface CorrectAnswerSelectedListener {
+        void onCorrectAnswerSelected();
+    }
+
+    public interface QuizResetListener {
+        void onQuizReset();
     }
 }

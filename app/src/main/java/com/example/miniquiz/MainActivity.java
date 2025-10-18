@@ -1,6 +1,7 @@
 package com.example.miniquiz;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +9,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity implements StartViewFragment.OnStartButtonClickListener {
+public class MainActivity extends AppCompatActivity
+        implements StartViewFragment.OnStartButtonClickListener,
+            QuizViewFragment.QuizResetListener,
+            QuizViewFragment.CorrectAnswerSelectedListener {
 
-
+    private int Score = 0;
+    private final int TotalQuestions = 5;
+    private TextView resultTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,11 @@ public class MainActivity extends AppCompatActivity implements StartViewFragment
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        resultTextView = findViewById(R.id.resultTextView);
+        // ustaw początkowy tekst wyniku
+        if (resultTextView != null) {
+            resultTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
+        }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -33,6 +44,17 @@ public class MainActivity extends AppCompatActivity implements StartViewFragment
 
     }
 
+    private void setScore(int score) {
+        this.Score = score;
+        if (resultTextView != null) {
+            resultTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
+        }
+    }
+
+    private void incrementScore() {
+        setScore(this.Score + 1);
+    }
+
     @Override
     public void onStartButtonClicked() {
         getSupportFragmentManager().beginTransaction().replace(
@@ -42,5 +64,20 @@ public class MainActivity extends AppCompatActivity implements StartViewFragment
                 .commit();
     }
 
+    @Override
+    public void onCorrectAnswerSelected() {
+        incrementScore();
+        if (resultTextView != null) {
+            resultTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
+        }
+    }
 
+    @Override
+    public void onQuizReset() {
+        getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .add(R.id.fragment_container_view, StartViewFragment.class, null)
+                .commit();
+        setScore(0);
+    }
 }
