@@ -35,8 +35,10 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
 
         Button resetButton = view.findViewById(R.id.resetButton);
         resetButton.setOnClickListener(v -> {
-            if(getParentFragment() instanceof QuizResetListener){
+            if (getParentFragment() instanceof QuizResetListener) {
                 ((QuizResetListener) getParentFragment()).onQuizReset();
+            } else if (getActivity() instanceof QuizResetListener) {
+                ((QuizResetListener) getActivity()).onQuizReset();
             }
         });
 

@@ -74,10 +74,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onQuizReset() {
+        // Najpierw zresetuj wynik
+        setScore(0);
+        // Zastąp aktualny fragment ekranem startowym (zamiast add, używamy replace)
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .add(R.id.fragment_container_view, StartViewFragment.class, null)
+                .replace(R.id.fragment_container_view, StartViewFragment.class, null)
                 .commit();
-        setScore(0);
     }
 }
