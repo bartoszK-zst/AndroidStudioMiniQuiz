@@ -74,13 +74,8 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
     }
 
     private void loadNextQuestion() {
-        if (QuestionNumber >= TotalQuestions) {
-            resetQuiz();
-            return;
-        }
-
-        // Pobierz pytanie i zaktualizuj widok
-        currentQuestion = questionsLibrary.getQuestion(QuestionNumber);
+        // Pobierz pytanie z biblioteki (getQuestion() obsługuje losowanie i oznaczanie użytych)
+        currentQuestion = questionsLibrary.getQuestion();
         if (currentQuestion == null) {
             Toast.makeText(getContext(), "Nie udało się pobrać pytania.", Toast.LENGTH_SHORT).show();
             return;
@@ -108,7 +103,7 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
                     .commit();
         }
 
-        // przygotuj index następnego pytania
+        // (opcjonalnie możemy śledzić liczbę pokazanych pytań)
         QuestionNumber++;
     }
 

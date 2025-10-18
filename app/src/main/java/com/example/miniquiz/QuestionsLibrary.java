@@ -7,6 +7,7 @@ public class QuestionsLibrary {
     private final Question[] questions;
     private boolean markUsedQuestions = false;
     private boolean[] usedQuestions;
+    private int previosQuestionIndex = -1;
     public QuestionsLibrary(Question[] questions, boolean markUsedQuestions){
         this.questions = questions.clone();
         this.markUsedQuestions = markUsedQuestions;
@@ -36,19 +37,29 @@ public class QuestionsLibrary {
     }
     public Question getQuestion(int index) {
         if (index >= 0 && index < questions.length) {
-            if(markUsedQuestions) {
+            Question q = questions[index];
+            if (markUsedQuestions) {
+                if (usedQuestions == null) {
+                    usedQuestions = new boolean[questions.length];
+                    markQuestionsUnused();
+                }
                 usedQuestions[index] = true;
             }
-            return questions[index];
+            previosQuestionIndex = index;
+            return q;
         }
         return null;
     }
     public Question getQuestion(){
         if(markUsedQuestions) {
-            Random rand = new Random();
-            int questionIndex = rand.nextInt(questions.length);
-            int attempts = 0;
-            while(usedQuestions[questionIndex]) {
+            // upewnij się, że tablica użytych pytań jest zainicjalizowana
+            if (usedQuestions == null) {
+                markQuestionsUnused();
+            }
+             Random rand = new Random();
+             int questionIndex = rand.nextInt(questions.length);
+             int attempts = 0;
+             while(usedQuestions[questionIndex] || questionIndex == previosQuestionIndex) {
                 attempts++;
                 if(questionIndex == questions.length - 1) {
                     questionIndex = 0;
@@ -73,7 +84,8 @@ public class QuestionsLibrary {
     }
 
     private void markQuestionsUnused() {
-        if(markUsedQuestions) {
+        if (markUsedQuestions) {
+            if (usedQuestions == null) usedQuestions = new boolean[questions.length];
             Arrays.fill(usedQuestions, false);
         }
     }
