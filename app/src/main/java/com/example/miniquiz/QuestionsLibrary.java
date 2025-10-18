@@ -1,5 +1,6 @@
 package com.example.miniquiz;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class QuestionsLibrary {
@@ -11,21 +12,17 @@ public class QuestionsLibrary {
         this.markUsedQuestions = markUsedQuestions;
         if(markUsedQuestions) {
             usedQuestions = new boolean[questions.length];
-            for (boolean questionUsedMark : usedQuestions
-                 ) {
-                questionUsedMark = false;
-            }
+            markQuestionsUnused();
         }
     }
     public QuestionsLibrary(Question[] questions){
-        this(questions, false);
+        this(questions, true);
     }
     public QuestionsLibrary() {
         this(new Question[] {
                 new Question("Jaki jest stolica Polski?", new String[]{"Warszawa", "Kraków", "Gdańsk"}, 0),
                 new Question("Ile wynosi 2 + 2?", new String[]{"3", "4", "5"}, 1),
                 new Question("Jaki jest największy ocean na Ziemi?", new String[]{"Atlantycki", "Spokojny", "Indyjski"}, 1),
-                new Question("Kto napisał 'Hamleta'?", new String[]{"Dante", "Szekspir", "Cervantes"}, 1),
                 new Question("Jaki jest symbol chemiczny wody?", new String[]{"H2O", "CO2", "O2"}, 0)
         });
     }
@@ -34,10 +31,7 @@ public class QuestionsLibrary {
         this.markUsedQuestions = markUsedQuestions;
         if(markUsedQuestions) {
             usedQuestions = new boolean[questions.length];
-            for (boolean questionUsedMark : usedQuestions
-            ) {
-                questionUsedMark = false;
-            }
+            markQuestionsUnused();
         }
     }
     public Question getQuestion(int index) {
@@ -80,9 +74,7 @@ public class QuestionsLibrary {
 
     private void markQuestionsUnused() {
         if(markUsedQuestions) {
-            for (int i = 0; i < usedQuestions.length; i++) {
-                usedQuestions[i] = false;
-            }
+            Arrays.fill(usedQuestions, false);
         }
     }
 }
