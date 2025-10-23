@@ -12,6 +12,15 @@
             </PendingDiffInfo>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+              <option name="originalContent" value="&lt;resources&gt;&#10;    &lt;string name=&quot;app_name&quot;&gt;MiniQuiz&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;answer_0&quot;&gt;Odpowiedź 0&lt;/string&gt;&#10;    &lt;string name=&quot;answer_1&quot;&gt;Odpowiedź 1&lt;/string&gt;&#10;    &lt;string name=&quot;answer_2&quot;&gt;Odpowiedź 2&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;result_label&quot;&gt;Wynik: &lt;/string&gt;&#10;    &lt;string name=&quot;reset_button&quot;&gt;RESETUJ QUIZ&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;question_placeholder&quot;&gt;Pytanie&lt;/string&gt;&#10;    &lt;string name=&quot;start_button&quot;&gt;Rozpocznij quiz&lt;/string&gt;&#10;    &lt;string name=&quot;author_text&quot;&gt;Mini Quiz – Autor Bartosz Król&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;result_format&quot;&gt;Wynik %1$d/%2$d&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;summary_text&quot;&gt;Pobieramy jeszcze wynik quizu&lt;/string&gt;&#10;    &lt;string name=&quot;summary_format&quot;&gt;Koniec quizu! Twój wynik: %1$d/%2$d&lt;/string&gt;&#10;&lt;/resources&gt;" />
+              <option name="updatedContent" value="&lt;resources&gt;&#10;    &lt;string name=&quot;app_name&quot;&gt;MiniQuiz&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;answer_0&quot;&gt;Odpowiedź 0&lt;/string&gt;&#10;    &lt;string name=&quot;answer_1&quot;&gt;Odpowiedź 1&lt;/string&gt;&#10;    &lt;string name=&quot;answer_2&quot;&gt;Odpowiedź 2&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;result_label&quot;&gt;Wynik: &lt;/string&gt;&#10;    &lt;string name=&quot;reset_button&quot;&gt;RESETUJ QUIZ&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;question_placeholder&quot;&gt;Pytanie&lt;/string&gt;&#10;    &lt;string name=&quot;start_button&quot;&gt;Rozpocznij quiz&lt;/string&gt;&#10;    &lt;string name=&quot;author_text&quot;&gt;Mini Quiz – Autor Bartosz Król&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;result_format&quot;&gt;Wynik %1$d/%2$d&lt;/string&gt;&#10;&#10;    &lt;string name=&quot;summary_text&quot;&gt;Pobieramy jeszcze wynik quizu&lt;/string&gt;&#10;    &lt;string name=&quot;summary_format&quot;&gt;Koniec quizu! Twój wynik: %1$d/%2$d&lt;/string&gt;&#10;&lt;/resources&gt;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

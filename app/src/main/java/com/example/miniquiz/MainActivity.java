@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity
 
     private int Score = 0;
     private final int TotalQuestions = 5;
+    private TextView scoreTextView;
     private TextView resultTextView;
 
     @Override
@@ -25,10 +26,10 @@ public class MainActivity extends AppCompatActivity
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        resultTextView = findViewById(R.id.resultTextView);
+        scoreTextView = findViewById(R.id.resultTextView);
         // ustaw początkowy tekst wyniku
-        if (resultTextView != null) {
-            resultTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
+        if (scoreTextView != null) {
+            scoreTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity
 
     private void setScore(int score) {
         this.Score = score;
-        if (resultTextView != null) {
-            resultTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
+        if (scoreTextView != null) {
+            scoreTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
         }
     }
 
@@ -68,8 +69,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onCorrectAnswerSelected() {
         incrementScore();
-        if (resultTextView != null) {
-            resultTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
+        if (scoreTextView != null) {
+            scoreTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
         }
     }
 
@@ -88,12 +89,7 @@ public class MainActivity extends AppCompatActivity
     public void onQuizFinished(int totalQuestions) {
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.fragment_container_view, SummaryViewFragment.class, null)
+                .replace(R.id.fragment_container_view, SummaryViewFragment.newInstance(Score, totalQuestions))
                 .commit();
-
-        resultTextView = findViewById(R.id.summaryTextView);
-        if(resultTextView != null) {
-            resultTextView.setText(getString(R.string.summary_format, Score, totalQuestions));
-        }
     }
 }
