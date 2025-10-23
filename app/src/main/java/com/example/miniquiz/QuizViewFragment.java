@@ -55,13 +55,9 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
         }
 
         if (index == currentQuestion.getCorrectAnswerIndex()) {
-            Toast.makeText(getContext(), "Poprawna odpowiedź!", Toast.LENGTH_SHORT).show();
-            // Powiadom kontener (np. aktywność) że zaznaczono poprawną odpowiedź
             if (getActivity() instanceof CorrectAnswerSelectedListener) {
                 ((CorrectAnswerSelectedListener) getActivity()).onCorrectAnswerSelected();
             }
-        } else {
-            Toast.makeText(getContext(), "Błędna odpowiedź!", Toast.LENGTH_SHORT).show();
         }
 
         // Jeżeli aktywność obsługuje wydarzenia, przekazuje dalej
@@ -74,6 +70,7 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
             if (getActivity() instanceof QuizFinishedListener) {
                 ((QuizFinishedListener) getActivity()).onQuizFinished(TotalQuestions);
             }
+            return; // nie ładuj kolejnego pytania po zakończeniu quizu
         }
 
         // Przejdź do następnego pytania
@@ -93,20 +90,14 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
             TextView questionText = root.findViewById(R.id.questionText);
             questionText.setText(currentQuestion.getQuestionText());
 
-            // Przygotuj opcje odpowiedzi (upewnij się, że jest przynajmniej 3 elementy)
+            // Przekazujemy pełną tablicę odpowiedzi do AnswersViewFragment
             String[] options = currentQuestion.getAnswerOptions();
-            if (options == null) {
-                options = new String[]{"", "", ""};
-            } else if (options.length < 3) {
-                String[] tmp = new String[3];
-                for (int i = 0; i < 3; i++) tmp[i] = i < options.length ? options[i] : "";
-                options = tmp;
-            }
+            int correctIdx = currentQuestion.getCorrectAnswerIndex();
 
-            // Wstaw AnswersViewFragment z aktualnymi opcjami
+            // Wstaw AnswersViewFragment z aktualnymi opcjami i indeksem poprawnej odpowiedzi
             getChildFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.answers_fragment_container, AnswersViewFragment.newInstance(options))
+                    .replace(R.id.answers_fragment_container, AnswersViewFragment.newInstance(options, correctIdx))
                     .commit();
         }
 

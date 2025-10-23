@@ -21,10 +21,10 @@ public class QuestionsLibrary {
     }
     public QuestionsLibrary() {
         this(new Question[] {
-                new Question("Jaki jest stolica Polski?", new String[]{"Warszawa", "Kraków", "Gdańsk"}, 0),
-                new Question("Ile wynosi 2 + 2?", new String[]{"3", "4", "5"}, 1),
+                new Question("Jaki jest stolica Polski?", new String[]{"Warszawa", "Kraków", "Gdańsk", "Bydgoszcz", "Radom", "Wilno"}, 0),
+                new Question("Ile wynosi 2 + 2?", new String[]{"3", "4", "5", "7"}, 1),
                 new Question("Jaki jest największy ocean na Ziemi?", new String[]{"Atlantycki", "Spokojny", "Indyjski"}, 1),
-                new Question("Jaki jest symbol chemiczny wody?", new String[]{"H2O", "CO2", "O2"}, 0)
+                new Question("Jaki jest symbol chemiczny wody?", new String[]{"H2O", "CO2", "O2", "H2SO4", "HCl", "H2"}, 0)
         });
     }
     public QuestionsLibrary(boolean markUsedQuestions) {
