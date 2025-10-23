@@ -13,4 +13,7 @@
     <string name="author_text">Mini Quiz – Autor Bartosz Król</string>
 
     <string name="result_format">Wynik %1$d/%2$d</string>
+
+    <string name="summary_text">Pobieramy jeszcze wynik quizu</string>
+    <string name="summary_format">Koniec quizu! Twój wynik: X/5</string>
 </resources>

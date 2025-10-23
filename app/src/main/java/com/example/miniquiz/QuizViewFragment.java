@@ -48,6 +48,13 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
 
     @Override
     public void onAnswerSelected(int index) {
+        // Sprawdza czy zadał już określoną liczbę pytań
+        if (QuestionNumber >= TotalQuestions) {
+            if (getActivity() instanceof QuizFinishedListener) {
+                ((QuizFinishedListener) getActivity()).onQuizFinished(TotalQuestions);
+            }
+        }
+
         // Sprawdź czy mamy aktualne pytanie
         if (currentQuestion == null) {
             Toast.makeText(getContext(), "Brak pytania.", Toast.LENGTH_SHORT).show();
@@ -119,5 +126,9 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
 
     public interface QuizResetListener {
         void onQuizReset();
+    }
+
+    public interface QuizFinishedListener {
+        void onQuizFinished(int totalQuestions);
     }
 }

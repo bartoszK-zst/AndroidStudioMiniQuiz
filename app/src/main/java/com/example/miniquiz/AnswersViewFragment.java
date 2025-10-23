@@ -21,10 +21,11 @@ public class AnswersViewFragment extends Fragment {
         super(R.layout.answers_view);
     }
 
-    // Factory method to create fragment with answers array
+    // metoda fabryczna do tworzenia fragmentu z podanymi odpowiedziami
     public static AnswersViewFragment newInstance(String[] answers) {
         AnswersViewFragment fragment = new AnswersViewFragment();
         Bundle args = new Bundle();
+        //tablica odpowiedzi będzie przekazana jako argument za kluczem
         args.putStringArray(ARG_ANSWERS, answers);
         fragment.setArguments(args);
         return fragment;
@@ -44,7 +45,8 @@ public class AnswersViewFragment extends Fragment {
             answers = getArguments().getStringArray(ARG_ANSWERS);
         }
 
-        // Przygotuj listę dostępnych indeksów odpowiedzi (maksymalnie 3)
+        // Przygotowuje listę dostępnych indeksów odpowiedzi (pobiera maksymalnie 3)
+        //TODO niech pobiera poprawną i 2 losowe inne odpowiedzi
         List<Integer> available = new ArrayList<>();
         if (answers != null) {
             for (int i = 0; i < answers.length && i < 3; i++) {
@@ -56,13 +58,13 @@ public class AnswersViewFragment extends Fragment {
         List<Integer> positions = new ArrayList<>(Arrays.asList(0,1,2));
         Collections.shuffle(positions, new Random());
 
-        // Ukryj wszystkie przyciski na start i usuń listenery
+        // Na czas losowania przyciski zostają ukryte
         for (Button btn : buttons) {
             btn.setVisibility(View.GONE);
             btn.setOnClickListener(null);
         }
 
-        // Rozmieść dostępne odpowiedzi we wylosowanych pozycjach
+        // Rozmieszcza dostępne odpowiedzi na przyciskach w losowej kolejności
         for (int j = 0; j < available.size(); j++) {
             int sourceIndex = available.get(j); // indeks w tablicy answers
             int pos = positions.get(j); // miejsce, w którym pokażemy tę odpowiedź

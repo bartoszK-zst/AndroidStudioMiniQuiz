@@ -12,7 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity
         implements StartViewFragment.OnStartButtonClickListener,
             QuizViewFragment.QuizResetListener,
-            QuizViewFragment.CorrectAnswerSelectedListener {
+            QuizViewFragment.CorrectAnswerSelectedListener,
+            QuizViewFragment.QuizFinishedListener{
 
     private int Score = 0;
     private final int TotalQuestions = 5;
@@ -81,5 +82,18 @@ public class MainActivity extends AppCompatActivity
                 .setReorderingAllowed(true)
                 .replace(R.id.fragment_container_view, StartViewFragment.class, null)
                 .commit();
+    }
+
+    @Override
+    public void onQuizFinished(int totalQuestions) {
+        getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.fragment_container_view, SummaryViewFragment.class, null)
+                .commit();
+
+        resultTextView = findViewById(R.id.summaryTextView);
+        if(resultTextView != null) {
+            resultTextView.setText(getString(R.string.summary_format, Score, totalQuestions));
+        }
     }
 }
