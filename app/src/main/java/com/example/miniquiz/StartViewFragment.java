@@ -20,7 +20,6 @@ public class StartViewFragment extends Fragment {
 
         Button startButton = view.findViewById(R.id.startButton);
         startButton.setOnClickListener(v -> {
-            // Sprawdź, czy aktywność implementuje nasz interfejs:
             if (getActivity() instanceof OnStartButtonClickListener) {
                 ((OnStartButtonClickListener) getActivity()).onStartButtonClicked();
             }

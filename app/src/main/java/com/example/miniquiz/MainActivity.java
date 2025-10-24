@@ -27,10 +27,7 @@ public class MainActivity extends AppCompatActivity
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         scoreTextView = findViewById(R.id.resultTextView);
-        // ustaw początkowy tekst wyniku
-        if (scoreTextView != null) {
-            scoreTextView.setText(getString(R.string.result_format, Score, TotalQuestions));
-        }
+        setScore(Score);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -76,9 +73,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onQuizReset() {
-        // Najpierw zresetuj wynik
         setScore(0);
-        // Zastąp aktualny fragment ekranem startowym (zamiast add, używamy replace)
+
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .replace(R.id.fragment_container_view, StartViewFragment.class, null)

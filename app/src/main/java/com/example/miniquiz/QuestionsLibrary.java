@@ -52,7 +52,6 @@ public class QuestionsLibrary {
     }
     public Question getQuestion(){
         if(markUsedQuestions) {
-            // upewnij się, że tablica użytych pytań jest zainicjalizowana
             if (usedQuestions == null) {
                 markQuestionsUnused();
             }
@@ -74,7 +73,6 @@ public class QuestionsLibrary {
                 }
             }
 
-            //Jeśli znaleziono nieużyte pytanie, zwraca je i oznacza jako użyte
             return getQuestion(questionIndex);
         }
         return getQuestion(0);

@@ -105,7 +105,7 @@ public class AnswersViewFragment extends Fragment {
     }
 
     private void notifyAnswerSelected(int index) {
-        // Najpierw sprawdź rodzica (fragment), potem aktywność
+        // Najpierw sprawdza rodzica (fragment), potem aktywność
         if (getParentFragment() instanceof OnAnswerSelectedListener) {
             ((OnAnswerSelectedListener) getParentFragment()).onAnswerSelected(index);
         } else if (getActivity() instanceof OnAnswerSelectedListener) {
@@ -113,7 +113,6 @@ public class AnswersViewFragment extends Fragment {
         }
     }
 
-    // Interfejs callbacku dla kontenera
     public interface OnAnswerSelectedListener {
         void onAnswerSelected(int index);
     }

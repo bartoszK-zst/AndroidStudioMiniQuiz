@@ -30,7 +30,6 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Reset i ustawienia UI
         resetQuiz();
 
         Button resetButton = view.findViewById(R.id.resetButton);
@@ -48,19 +47,12 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
 
     @Override
     public void onAnswerSelected(int index) {
-        // Sprawdź czy mamy aktualne pytanie
-        if (currentQuestion == null) {
-            Toast.makeText(getContext(), "Brak pytania.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         if (index == currentQuestion.getCorrectAnswerIndex()) {
             if (getActivity() instanceof CorrectAnswerSelectedListener) {
                 ((CorrectAnswerSelectedListener) getActivity()).onCorrectAnswerSelected();
             }
         }
 
-        // Jeżeli aktywność obsługuje wydarzenia, przekazuje dalej
         if (getActivity() instanceof AnswersViewFragment.OnAnswerSelectedListener) {
             ((AnswersViewFragment.OnAnswerSelectedListener) getActivity()).onAnswerSelected(index);
         }
@@ -70,10 +62,9 @@ public class QuizViewFragment extends Fragment implements AnswersViewFragment.On
             if (getActivity() instanceof QuizFinishedListener) {
                 ((QuizFinishedListener) getActivity()).onQuizFinished(TotalQuestions);
             }
-            return; // nie ładuj kolejnego pytania po zakończeniu quizu
+            return;
         }
 
-        // Przejdź do następnego pytania
         loadNextQuestion();
     }
 
